@@ -1,0 +1,11 @@
+total 2736
+-rwxr-xr-x  1 fcoindre  2022_lausanne    49896 Mar  2 18:12 a.out
+drwxr-xr-x  3 fcoindre  2022_lausanne      102 Mar  1 11:50 a.out.dSYM
+-rw-r--r--  1 fcoindre  2022_lausanne       27 Mar  1 16:16 alpha.txt
+-rw-r--r--@ 1 fcoindre  2022_lausanne  1324774 Mar  1 10:28 fr.subject.pdf
+-rwxrwxrwx  1 fcoindre  2022_lausanne       63 Mar  1 17:30 hello.txt
+-rw-r--r--  1 fcoindre  2022_lausanne     4165 Mar  2 18:12 test.c
+-rw-r--r--  1 fcoindre  2022_lausanne      699 Mar  2 18:12 test.txt
+x   1 fcoindre  2022_lausanne       63 Mar  1 17:30 hello.txt
+-rw-r--r--   1 fcoindre  2022_lausanne     4016 Mar  2 18:05 test.c
+-rw-r--r--   1 fcoindre  2022_lausanne      699 Mar  2 17:53 test.txt
