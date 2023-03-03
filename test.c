@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
-
+/*
 int main(int argc, char *argv[], char *env[])
 {
 	
@@ -44,7 +44,7 @@ int main(int argc, char *argv[], char *env[])
 
 	}
 	return 0;
-}
+}*/
 /*
 #include <unistd.h>
 #include <stdio.h>
