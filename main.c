@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 10:34:33 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/03/07 17:44:07 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/03/07 21:10:02 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,96 @@
 #include <stdio.h>
 #include <fcntl.h>
 
+int cmd_exists(char *cmd, char *env[]);
+void	ft_free_tabs(char **tab, int h);
+int size_tab(char **tab);
 
+void	ft_free_tabs(char **tab, int h)
+{
+	int	i;
+
+	i = 0;
+	while (i <= h)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+int size_tab(char **tab)
+{
+    int count;
+
+    count = 0;
+    while (tab[count] != NULL)
+        count++;
+    return count;
+}
+
+int cmd_exists(char *cmd, char *env[])
+{
+    int i;
+    char **paths_cmd;
+    char *paths;
+    char *path_to_test;
+    char *tmp;
+
+    i = 0;
+    while (env[i])
+    {
+        if (strncmp(env[i], "PATH", 4) == 0)
+        {
+            paths = ft_substr(env[i], 5, ft_strlen(env[i])-4);
+        }
+        i++;
+    }
+
+    
+    paths_cmd = ft_split(paths, ':');
+    free(paths);
+    paths = NULL;
+
+
+    i = 0;
+    while (paths_cmd[i])
+    {
+        // A mettre dans une fontion externe char *create_path_cmd(char *cmd, char *env[]) ?
+        tmp = ft_strjoin(paths_cmd[i], "/");
+        path_to_test = ft_strjoin(tmp, cmd);
+        free(tmp);
+        tmp = NULL;
+        if (access(path_to_test, F_OK) == 0)
+        {
+            printf("[%d] path %s : OK\n", i, path_to_test);
+            free(path_to_test);
+            path_to_test = NULL;
+            break;
+        }
+        free(path_to_test);
+        path_to_test = NULL;
+        i++;
+    }
+    
+    ft_free_tabs(paths_cmd, size_tab(paths_cmd));
+
+    return 4200000;
+
+}
 
 
 
 
 int main(int argc, char *argv[], char *env[])
 {
+
+
+    cmd_exists("awk", env);
+    (void) argc;
     (void) argv;
+
+    
+    /*
     (void) env;
     pid_t pid;
     int wait_status;
@@ -131,7 +213,7 @@ int main(int argc, char *argv[], char *env[])
     }
 
     
-
+    */
 
     return 0;
 }
