@@ -1,0 +1,4 @@
+*.txt
+/poubelle
+a.out.dSYM
+

@@ -1,15 +1,6 @@
-total 2784
--rwxr-xr-x   1 fcoindre  2022_lausanne    49904 Mar  3 14:46 a.out
-drwxr-xr-x   3 fcoindre  2022_lausanne      102 Mar  1 11:50 a.out.dSYM
--rw-r--r--   1 fcoindre  2022_lausanne       27 Mar  1 16:16 alpha.txt
--rw-r--r--@  1 fcoindre  2022_lausanne  1324774 Mar  1 10:28 fr.subject.pdf
--rwxrwxrwx   1 fcoindre  2022_lausanne       63 Mar  1 17:30 hello.txt
--rw-r--r--   1 fcoindre  2022_lausanne        6 Mar  3 10:25 infile
--rw-r--r--   1 fcoindre  2022_lausanne       74 Mar  3 10:27 infile.txt
-drwxr-xr-x  75 fcoindre  2022_lausanne     2550 Feb 28 12:11 libft
--rw-r--r--   1 fcoindre  2022_lausanne     2094 Mar  3 14:36 main.c
--rw-r--r--   1 fcoindre  2022_lausanne        9 Mar  3 10:27 outfile.txt
--rw-r--r--   1 fcoindre  2022_lausanne     5153 Mar  3 13:56 test.c
--rw-r--r--   1 fcoindre  2022_lausanne     1186 Mar  3 14:42 test.txt
--rw-r--r--   1 fcoindre  2022_lausanne      763 Mar  3 14:46 test2.c
--rw-r--r--   1 fcoindre  2022_lausanne        1 Mar  3 14:46 text.txt
+AAAAAA
+BBBBBB
+EE
+fffff
+ggggg
+HHHHHHHHH
