@@ -1,17 +1,1 @@
-total 2752
-drwxr-xr-x  16 fcoindre  2022_lausanne      544 Mar  8 15:00 .
-drwxr-xr-x  17 fcoindre  2022_lausanne      578 Mar  8 13:27 ..
-drwxr-xr-x  12 fcoindre  2022_lausanne      408 Mar  7 21:14 .git
--rw-r--r--   1 fcoindre  2022_lausanne       28 Mar  7 14:38 .gitignore
--rwxr-xr-x   1 fcoindre  2022_lausanne    50840 Mar  8 14:59 a.out
-drwxr-xr-x   3 fcoindre  2022_lausanne      102 Mar  1 11:50 a.out.dSYM
--rw-r--r--@  1 fcoindre  2022_lausanne  1324774 Mar  1 10:28 fr.subject.pdf
--rw-r--r--   1 fcoindre  2022_lausanne       33 Mar  8 13:04 infile
--rw-r--r--   1 fcoindre  2022_lausanne        0 Mar  8 14:54 infile0
--rw-r--r--   1 fcoindre  2022_lausanne        0 Mar  8 11:45 leacks_cheker_ex.c
-drwxr-xr-x  75 fcoindre  2022_lausanne     2550 Feb 28 12:11 libft
--rw-r--r--   1 fcoindre  2022_lausanne     4285 Mar  8 14:57 main.c
--rw-r--r--   1 fcoindre  2022_lausanne       25 Mar  8 14:59 outfile
--rw-r--r--   1 fcoindre  2022_lausanne       25 Mar  8 15:00 outfile0
-drwxr-xr-x  10 fcoindre  2022_lausanne      340 Mar  7 17:38 poubelle
--rw-r--r--   1 fcoindre  2022_lausanne       38 Mar  7 17:12 text.txt
+       2       6      35
