@@ -1,9 +1,24 @@
 #include "pipex.h"
 
+
+void command_not_found(char *cmd)
+{
+    char *msg_err;
+    char *tmp;
+
+    tmp = ft_strjoin("pipex: command not found: ", cmd);
+
+    msg_err = ft_strjoin(tmp, "\n");
+
+    ft_putstr_fd(msg_err,2);
+
+    free(tmp);
+    free(msg_err);
+}
+
+
 int main()
 {
-    int fd_infile;
-    fd_infile = open("file_in", O_RDONLY | O_CREAT, 0644);
-    printf("%d\n",fd_infile);
+    command_not_found("whateverr");
     return 0;
 }
