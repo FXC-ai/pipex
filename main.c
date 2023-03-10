@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 10:34:33 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/03/08 16:08:59 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:01:00 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int main(int argc, char *argv[], char *env[])
     if (argc != 5)
     {
         ft_putstr_fd("pipex : Invalid number of arguments\n", 2);
-        return (0);
+        //exit (128);
+        return (1);
     }
 
     pipe_status = pipe(pipefd);
