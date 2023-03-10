@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 10:34:33 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/03/10 15:01:00 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:38:43 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int main(int argc, char *argv[], char *env[])
     pipe_status = pipe(pipefd);
     if (pipe_status == -1)
     {
-        perror("pipe");
+        perror("pipex");
         exit(EXIT_FAILURE);
     }
 
     pid = fork();
     if (pid == -1)
     {
-        perror("fork");
+        perror("pipex");
         exit(EXIT_FAILURE);
     }
 
@@ -51,4 +51,3 @@ int main(int argc, char *argv[], char *env[])
     }
     return 0;
 }
-
