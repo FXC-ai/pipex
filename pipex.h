@@ -18,6 +18,8 @@
 #include <sys/wait.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <string.h>
+#include <errno.h>
 
 char *cmd_exists(char *cmd, char *env[]);
 void	ft_free_tabs(char **tab, int h);

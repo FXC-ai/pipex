@@ -55,6 +55,28 @@ void command_not_found(char *cmd)
     free(msg_err);
 }
 
+void permission_denied(char *file_name)
+{
+    char *msg_sys;
+    char *msg_err;
+    char *tmp;
+
+    msg_sys = strerror(EACCES);
+    tmp = ft_strjoin("pipex: ", msg_sys);
+    msg_err = ft_strjoin(tmp, ": ");
+    free(tmp);
+    tmp = NULL;
+
+
+    tmp = ft_strjoin(msg_err, file_name);
+    free(msg_err);
+
+    ft_putstr_fd(tmp,2);
+    ft_putstr_fd("\n",2);
+
+    free(tmp);
+}
+
 void    child_process(int *pipefd, char *argv[], char *env[])
 {
 
@@ -68,6 +90,24 @@ void    child_process(int *pipefd, char *argv[], char *env[])
     tab_cmd1 = ft_split(argv[2], ' ');
     path_cmd1 = cmd_exists(tab_cmd1[0], env);
 
+    fd_infile = open(argv[1], O_RDONLY, 0644);
+
+    if (fd_infile == -1)
+    {
+        free(tab_cmd1);
+        close(pipefd[1]);
+        if (errno == EACCES)
+        {
+            permission_denied(argv[1]);
+        }
+        else
+        {
+            perror("pipex");
+        }
+
+        exit(EXIT_FAILURE);
+    }
+
     if (path_cmd1 == NULL)
     {
         command_not_found(tab_cmd1[0]);
@@ -75,38 +115,26 @@ void    child_process(int *pipefd, char *argv[], char *env[])
         close(pipefd[1]);
         return;
     }
-    else
+        
+    if(dup2(fd_infile,0) == -1 || dup2(pipefd[1], 1) == -1)
     {
-
-        fd_infile = open(argv[1], O_RDONLY, 0644);
-        if (fd_infile == -1)
-        {
-            free(tab_cmd1);
-            close(pipefd[1]);
-            //printf("TEST = %s", strerror(EACCES));
-            perror("pipex");
-            exit(EXIT_FAILURE);
-        }
-    
-        if(dup2(fd_infile,0) == -1 || dup2(pipefd[1], 1) == -1)
-        {
-            free(tab_cmd1);
-            close(fd_infile);
-            close(pipefd[1]);
-            perror("pipex");
-            exit(EXIT_FAILURE);
-        }
+        free(tab_cmd1);
         close(fd_infile);
-    
-        if (execve(path_cmd1, tab_cmd1, env) == -1)
-        {
-            perror("pipex");
-            close(pipefd[1]);
-            exit(EXIT_FAILURE);
-        }
-    
-	    close(pipefd[1]);
+        close(pipefd[1]);
+        perror("pipex");
+        exit(EXIT_FAILURE);
     }
+    close(fd_infile);
+    
+    if (execve(path_cmd1, tab_cmd1, env) == -1)
+    {
+        perror("pipex");
+        close(pipefd[1]);
+        exit(EXIT_FAILURE);
+    }
+    
+	close(pipefd[1]);
+    
 }
 
 void    parent_process(int *pipefd, char *argv[], char *env[])
@@ -126,7 +154,14 @@ void    parent_process(int *pipefd, char *argv[], char *env[])
     {
         free(tab_cmd2);
         close(pipefd[0]);
-        perror("pipex");
+        if (errno == EACCES)
+        {
+            permission_denied(argv[1]);
+        }
+        else
+        {
+            perror("pipex");
+        }
         exit(EXIT_FAILURE);
     }
 
