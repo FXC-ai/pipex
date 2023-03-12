@@ -55,13 +55,13 @@ void command_not_found(char *cmd)
     free(msg_err);
 }
 
-void permission_denied(char *file_name)
+void error_msg(char *file_name)
 {
     char *msg_sys;
     char *msg_err;
     char *tmp;
 
-    msg_sys = strerror(EACCES);
+    msg_sys = strerror(errno);
     tmp = ft_strjoin("pipex: ", msg_sys);
     msg_err = ft_strjoin(tmp, ": ");
     free(tmp);
@@ -96,14 +96,9 @@ void    child_process(int *pipefd, char *argv[], char *env[])
     {
         free(tab_cmd1);
         close(pipefd[1]);
-        if (errno == EACCES)
-        {
-            permission_denied(argv[1]);
-        }
-        else
-        {
-            perror("pipex");
-        }
+        error_msg(argv[1]);
+
+
 
         exit(EXIT_FAILURE);
     }
@@ -154,14 +149,12 @@ void    parent_process(int *pipefd, char *argv[], char *env[])
     {
         free(tab_cmd2);
         close(pipefd[0]);
-        if (errno == EACCES)
-        {
-            permission_denied(argv[1]);
-        }
-        else
+        error_msg(argv[1]);
+        
+        /*else
         {
             perror("pipex");
-        }
+        }*/
         exit(EXIT_FAILURE);
     }
 
