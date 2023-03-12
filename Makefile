@@ -1,4 +1,4 @@
-SRCS 	= main.c utils.c process.c
+SRCS 	= main.c utils.c process.c errors.c
 
 OBJS	= ${SRCS:.c=.o}
 

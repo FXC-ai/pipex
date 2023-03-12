@@ -99,26 +99,6 @@ void	error_msg(char *file_name)
 	free(tmp);
 }
 
-static void handle_open_err(int fd, char *cmd)
-{
-	close(fd);
-	error_msg(cmd);
-	exit(EXIT_FAILURE);
-}
-
-static void handle_cmd_err(int fd, char **tab_cmd)
-{
-	command_not_found(tab_cmd[0]);
-	ft_free_tabs(tab_cmd, size_tab(tab_cmd));
-	close(fd);
-}
-/*
-static void handle_dup_err(int fd, char **tab_cmd,)
-{
-
-
-}*/
-
 void	child_process(int *pipefd, char *argv[], char *env[])
 {
 	int		fd_infile;
@@ -129,7 +109,6 @@ void	child_process(int *pipefd, char *argv[], char *env[])
 	fd_infile = open(argv[1], O_RDONLY, 0644);
 	if (fd_infile == -1)
 		handle_open_err(pipefd[1], argv[1]);
-
 	tab_cmd1 = ft_split(argv[2], ' ');
 	path_cmd1 = cmd_exists(tab_cmd1[0], env);
 	if (path_cmd1 == NULL)
@@ -138,23 +117,10 @@ void	child_process(int *pipefd, char *argv[], char *env[])
 		return ;
 	}
 	if (dup2(fd_infile, 0) == -1 || dup2(pipefd[1], 1) == -1)
-	{
-		free(path_cmd1);
-		ft_free_tabs(tab_cmd1, size_tab(tab_cmd1));
-		close(fd_infile);
-		close(pipefd[1]);
-		perror("pipex");
-		exit(EXIT_FAILURE);
-	}
+		handle_dup_err(fd_infile, pipefd[1], tab_cmd1, path_cmd1);
 	close(fd_infile);
 	if (execve(path_cmd1, tab_cmd1, env) == -1)
-	{
-		free(path_cmd1);
-		ft_free_tabs(tab_cmd1, size_tab(tab_cmd1));
-		close(pipefd[1]);
-		perror("pipex");
-		exit(EXIT_FAILURE);
-	}
+		handle_exec_err(pipefd[1], tab_cmd1, path_cmd1);
 	close(pipefd[1]);
 }
 
@@ -167,36 +133,18 @@ void	parent_process(int *pipefd, char *argv[], char *env[])
 	close(pipefd[1]);
 	fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd_outfile == -1)
-	{
-		close(pipefd[0]);
-		error_msg(argv[1]);
-		exit(EXIT_FAILURE);
-	}
+		handle_open_err(pipefd[0], argv[4]);
 	tab_cmd2 = ft_split(argv[3], ' ');
 	path_cmd2 = cmd_exists(tab_cmd2[0], env);
 	if (path_cmd2 == NULL)
 	{
-		command_not_found(tab_cmd2[0]);
-		free(tab_cmd2);
-		close(pipefd[0]);
+		handle_cmd_err(pipefd[0], tab_cmd2);
 		exit(127);
 	}
 	if (dup2(pipefd[0], 0) == -1 || dup2(fd_outfile, 1) == -1)
-	{
-		free(tab_cmd2);
-		ft_free_tabs(tab_cmd2, size_tab(tab_cmd2));
-		close(pipefd[0]);
-		perror("pipex");
-		exit(EXIT_FAILURE);
-	}
+		handle_dup_err(fd_outfile, pipefd[0], tab_cmd2, path_cmd2);
 	close(fd_outfile);
 	if (execve(path_cmd2, tab_cmd2, env) == -1)
-	{
-		//free(tab_cmd2);
-		//ft_free_tabs(tab_cmd2, size_tab(tab_cmd2));
-		close(pipefd[0]);
-		perror("pipex");
-		exit(EXIT_FAILURE);
-	}
+		handle_exec_err(pipefd[0], tab_cmd2, path_cmd2);
 	close(pipefd[0]);
 }
