@@ -13,23 +13,20 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
-#include "libft/libft.h"
-#include <unistd.h>
-#include <sys/wait.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <string.h>
-#include <errno.h>
+# include "libft/libft.h"
+# include <unistd.h>
+# include <sys/wait.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <string.h>
+# include <errno.h>
 
-char *cmd_exists(char *cmd, char *env[]);
+char	*cmd_exists(char *cmd, char *env[]);
 void	ft_free_tabs(char **tab, int h);
-int size_tab(char **tab);
-char **create_tab_paths(char *env[]);
-char *create_path_cmd(char *path, char *cmd);
-
-char *cmd_exists(char *cmd, char *env[]);
-void    child_process(int *pipefd, char *argv[], char *env[]);
-void    parent_process(int *pipefd, char *argv[], char *env[]);
-
-
+int		size_tab(char **tab);
+char	**create_tab_paths(char *env[]);
+char	*create_path_cmd(char *path, char *cmd);
+char	*cmd_exists(char *cmd, char *env[]);
+void	child_process(int *pipefd, char *argv[], char *env[]);
+void	parent_process(int *pipefd, char *argv[], char *env[]);
 #endif
