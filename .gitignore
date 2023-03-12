@@ -1,4 +1,5 @@
 *.txt
+*.o
 /poubelle
 a.out.dSYM
 /PIPEXaminator
