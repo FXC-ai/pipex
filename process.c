@@ -6,68 +6,11 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 15:50:50 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/03/10 18:43:21 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:55:27 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-//cmd_exists free tout si la commande existe pas
-
-char	**create_tab_paths(char *env[])
-{
-	int		i;
-	char	*paths;
-	char	**paths_tab;
-
-	i = 0;
-	while (env[i])
-	{
-		if (strncmp(env[i], "PATH", 4) == 0)
-			paths = ft_substr(env[i], 5, ft_strlen(env[i]) - 4);
-		i++;
-	}
-	paths_tab = ft_split(paths, ':');
-	free(paths);
-	paths = NULL;
-	return (paths_tab);
-}
-
-char	*create_path_cmd(char *path, char *cmd)
-{
-	char	*tmp;
-	char	*path_cmd;
-
-	tmp = ft_strjoin(path, "/");
-	path_cmd = ft_strjoin(tmp, cmd);
-	free(tmp);
-	tmp = NULL;
-	return (path_cmd);
-}
-
-char	*cmd_exists(char *cmd, char *env[])
-{
-	int		i;
-	char	**tab_paths;
-	char	*path_to_test;
-
-	tab_paths = create_tab_paths(env);
-	i = 0;
-	while (tab_paths[i])
-	{
-		path_to_test = create_path_cmd(tab_paths[i], cmd);
-		if (access(path_to_test, F_OK) == 0)
-		{
-			ft_free_tabs(tab_paths, size_tab(tab_paths));
-			return (path_to_test);
-		}
-		free(path_to_test);
-		path_to_test = NULL;
-		i++;
-	}
-	ft_free_tabs(tab_paths, size_tab(tab_paths));
-	return (NULL);
-}
 
 void	command_not_found(char *cmd)
 {

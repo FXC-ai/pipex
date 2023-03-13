@@ -6,7 +6,7 @@
 /*   By: fcoindre <fcoindre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 20:52:30 by fcoindre          #+#    #+#             */
-/*   Updated: 2023/02/07 15:57:29 by fcoindre         ###   ########.fr       */
+/*   Updated: 2023/03/13 10:47:01 by fcoindre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,3 @@ void	ft_print_hex(va_list args, char *base, int *ptr_c_count)
 		*ptr_c_count += 1;
 	}
 }
-
-
-
